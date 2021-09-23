@@ -1,0 +1,172 @@
+<template>
+	<div>
+		<header>
+			<nav>
+				<router-link to="/"><h4>NEWS CENTER</h4></router-link>
+				<div class="filter">
+					<select
+						v-if="isCountryEnabled"
+						@change="changeCategory"
+						name="category"
+						id="category"
+					>
+						<option
+							v-for="category in categories"
+							:key="category.code"
+							:value="category.code"
+						>
+							{{ category.label }}
+						</option>
+					</select>
+					<select
+						v-if="isCountryEnabled"
+						@change="changeCountry"
+						name="country"
+						id="country"
+						:value="getCountry"
+					>
+						<option
+							v-for="country in countries"
+							:key="country.code"
+							:value="country.code"
+						>
+							{{ country.label }}
+						</option>
+					</select>
+					<input
+						@keyup="searchFunction"
+						:value="searchText"
+						type="text"
+						name="searchText"
+						id="searchText"
+						placeholder="Press / to search"
+						ref="searchInput"
+					/>
+				</div>
+			</nav>
+		</header>
+	</div>
+</template>
+
+<script>
+import { countries, categories } from '@/components/helper.js'
+
+let delay = null
+export default {
+	data() {
+		return {
+			countries,
+			categories
+		}
+	},
+	computed: {
+		searchText() {
+			return this.$store.getters['searchText']
+		},
+		getCountry() {
+			return this.$store.getters['country']
+		},
+		isCountryEnabled() {
+			return !this.$store.getters['searchText']
+		},
+		getCategory() {
+			return this.$store.getters['category']
+		}
+	},
+	methods: {
+		searchFunction(e) {
+			this.$store.dispatch('setSearchText', e.target.value)
+			if (delay) {
+				clearTimeout(delay)
+			}
+			delay = setTimeout(() => {
+				this.$store.dispatch('search')
+			}, 1000)
+		},
+		changeCountry(e) {
+			this.$store.dispatch('setCountry', e.target.value)
+		},
+		changeCategory(e) {
+			this.$store.dispatch('setCategory', e.target.value)
+		}
+	},
+	watch: {
+		async getCountry(curVal, nextVal) {
+			if (curVal !== nextVal) {
+				await this.$store.dispatch('getResultByPage', {
+					page: 0
+				})
+			}
+		},
+		async getCategory(curVal, nextVal) {
+			if (curVal !== nextVal) {
+				await this.$store.dispatch('getResultByPage', {
+					page: 0
+				})
+			}
+		}
+	},
+	mounted() {
+		window.addEventListener('keyup', (e) => {
+			if (e.key === '/') {
+				this.$refs.searchInput.focus()
+			}
+		})
+	},
+	unmounted() {
+		window.removeEventListener('keyup', () => {})
+	},
+}
+
+document.body.style = 'margin:0;padding:0;'
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+header {
+	background-color: blanchedalmond;
+	padding: 2rem 0;
+
+	nav {
+		margin: auto;
+		width: 80%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		@media screen and (max-width: 1280px) and (max-width: 600px) {
+			margin: 0;
+			width: 100%;
+		}
+
+		h4 {
+			margin: 0;
+			font-size: 1.5rem;
+		}
+
+		.filter {
+			display: flex;
+			justify-content: space-between;
+			input,
+			select {
+				padding: 1rem 0.5rem;
+				margin: 0 0 0 1rem;
+				width: 16rem;
+				transition: 0.5s all ease-in-out;
+				border: none;
+				font-family: 'Forum', cursive;
+				font-size: 1rem;
+
+				&:focus-within {
+					outline: none;
+				}
+			}
+		}
+	}
+}
+</style>

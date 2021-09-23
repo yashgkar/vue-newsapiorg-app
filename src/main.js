@@ -3,4 +3,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-createApp(App).use(store).use(router).mount('#app')
+import MainHeader from './components/Header.vue'
+import Popup from './components/Popup.vue'
+
+const app = createApp(App)
+
+app.use(store)
+
+app.component('main-header', MainHeader)
+app.component('popup', Popup)
+app.use(router)
+app.mount('#app')
