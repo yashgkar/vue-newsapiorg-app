@@ -24,12 +24,12 @@ export default {
 		date() {
 			return new Date(this.newsdata.publishedAt).toDateString()
 		},
-		description (){
+		description() {
 			return this.newsdata.description
 		}
 	},
 	methods: {
-		openDetails (){
+		openDetails() {
 			this.$router.push(`/${this.newsdata.id}`)
 		}
 	}
@@ -42,6 +42,11 @@ section {
 	border-radius: 7px;
 	border: 1px solid #ccc;
 	height: 28rem;
+	width: 24rem;
+
+	@media screen and (max-width: 1280px) and (max-width: 600px) {
+		width: 100vw;
+	}
 
 	.image-container {
 		display: flex;
@@ -81,7 +86,7 @@ section {
 		}
 
 		h4,
-		h5{
+		h5 {
 			margin: 6px 4px;
 		}
 

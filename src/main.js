@@ -12,5 +12,6 @@ app.use(store)
 
 app.component('main-header', MainHeader)
 app.component('popup', Popup)
+
 app.use(router)
 app.mount('#app')

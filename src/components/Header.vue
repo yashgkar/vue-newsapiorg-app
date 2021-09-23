@@ -9,6 +9,7 @@
 						@change="changeCategory"
 						name="category"
 						id="category"
+						:value="getCategory"
 					>
 						<option
 							v-for="category in categories"
@@ -121,7 +122,6 @@ export default {
 document.body.style = 'margin:0;padding:0;'
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 header {
 	background-color: blanchedalmond;
@@ -142,6 +142,11 @@ header {
 		@media screen and (max-width: 1280px) and (max-width: 600px) {
 			margin: 0;
 			width: 100%;
+			flex-direction: column;
+
+			.filter {
+				flex-direction: column;
+			}
 		}
 
 		h4 {
@@ -152,11 +157,14 @@ header {
 		.filter {
 			display: flex;
 			justify-content: space-between;
+			align-items: center;
+
 			input,
 			select {
 				padding: 1rem 0.5rem;
-				margin: 0 0 0 1rem;
+				margin: 0.5rem 1rem;
 				width: 16rem;
+				box-sizing: border-box;
 				transition: 0.5s all ease-in-out;
 				border: none;
 				font-family: 'Forum', cursive;

@@ -4,11 +4,7 @@
 		<div class="router-view-styles">
 			<router-view />
 		</div>
-		<popup
-			:show="isError"
-			:title="errorStatus"
-			@close="closePopup"
-		>
+		<popup :show="isError" :title="errorStatus" @close="closePopup">
 			{{ errorObj.message }}
 		</popup>
 	</main>
@@ -61,6 +57,11 @@ body {
 .home {
 	width: 80%;
 	margin: auto;
+	
+	@media screen and (max-width: 900px) and (max-width: 600px) {
+		margin: 0;
+		width: 100%;
+	}
 }
 
 .router-view-styles {
