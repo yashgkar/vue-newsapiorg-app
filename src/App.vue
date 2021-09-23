@@ -24,7 +24,10 @@ export default {
 			return this.$store.getters['error']
 		},
 		errorStatus() {
-			return this.errorObj.status + ': ' + this.errorObj.code
+			if (this.isError) {
+				return this.errorObj.status + ': ' + this.errorObj.code
+			}
+			return ''
 		}
 	},
 	async created() {
