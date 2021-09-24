@@ -34,6 +34,17 @@ export default {
 			this.$route.params.id
 		)
 		this.article = singleArticle
+	},
+	mounted() {
+		window.addEventListener('keyup', (e) => {
+			console.log(e)
+			if (e.key === 'Backspace') {
+				this.$router.back()
+			}
+		})
+	},
+	unmounted() {
+		window.removeEventListener('keyup', () => {})
 	}
 }
 </script>

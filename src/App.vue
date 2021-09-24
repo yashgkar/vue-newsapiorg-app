@@ -2,7 +2,9 @@
 	<main>
 		<main-header />
 		<div class="router-view-styles">
-			<router-view />
+			<transition name="router">
+				<router-view />
+			</transition>
 		</div>
 		<popup :show="isError" :title="errorStatus" @close="closePopup">
 			{{ errorObj.message }}
@@ -57,7 +59,7 @@ body {
 .home {
 	width: 80%;
 	margin: auto;
-	
+
 	@media screen and (max-width: 900px) and (max-width: 600px) {
 		margin: 0;
 		width: 100%;
@@ -66,5 +68,22 @@ body {
 
 .router-view-styles {
 	font-family: 'PT Sans', cursive;
+
+	.router-enter-from,
+	.router-leave-to {
+		opacity: 0;
+		transform: translateY(1rem);
+	}
+
+	.router-enter-to,
+	.router-leave-from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.router-leave-active,
+	.router-enter-active {
+		transition: all 0.2s ease-in-out;
+	}
 }
 </style>

@@ -123,11 +123,7 @@ dialog {
 	transform: scale(1);
 }
 
-.dialog-enter-active {
-	transition: all 0.2s ease-in-out;
-}
-
-.dialog-leave-active {
+.dialog-leave-active, .dialog-enter-active{
 	transition: all 0.2s ease-in-out;
 }
 
