@@ -67,7 +67,7 @@ export default {
 }
 button {
 	padding: 6px 1rem;
-	border: 1px solid #ccc;
+	border: 1px solid rgb(124, 124, 124);
 	text-transform: uppercase;
 
 

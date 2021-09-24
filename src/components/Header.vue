@@ -125,7 +125,7 @@ document.body.style = 'margin:0;padding:0;'
 <style scoped lang="scss">
 header {
 	background-color: blanchedalmond;
-	padding: 2rem 0;
+	padding: 1rem 0;
 
 	nav {
 		margin: auto;
@@ -161,17 +161,21 @@ header {
 
 			input,
 			select {
-				padding: 1rem 0.5rem;
-				margin: 0.5rem 1rem;
-				width: 16rem;
+				padding: 0.8rem;
+				margin: 0 0 0 0.5rem;
+				width: 14rem;
 				box-sizing: border-box;
-				transition: 0.5s all ease-in-out;
+				transition: 0.3s all ease-in-out;
 				border: none;
 				font-family: 'Forum', cursive;
 				font-size: 1rem;
 
 				&:focus-within {
 					outline: none;
+				}
+
+				@media screen and (max-width: 1280px) and (max-width: 600px) {
+					margin: 0.5rem 0;
 				}
 			}
 		}

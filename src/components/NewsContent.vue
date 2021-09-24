@@ -9,7 +9,7 @@
 					:newsdata="article"
 				/>
 			</div>
-			<h2 class="loader">Loading...</h2>
+			<h2 class="loader" v-else>Loading...</h2>
 		</div>
 	</div>
 </template>
