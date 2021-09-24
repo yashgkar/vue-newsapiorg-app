@@ -42,7 +42,30 @@ section {
 	border-radius: 7px;
 	border: 1px solid #ccc;
 	height: 28rem;
-	width: 24rem;
+	width: 90%;
+	margin-bottom: 1rem;
+
+	&:nth-child(3n-2) {
+		justify-self: self-start;
+	}
+
+	&:nth-child(3n-1) {
+		justify-self: center;
+	}
+
+	&:nth-child(3n) {
+		justify-self: self-end;
+	}
+
+	@media screen and (max-width: 1280px) {
+		&:nth-child(2n) {
+			justify-self: self-end;
+		}
+
+		&:nth-child(2n-1) {
+			justify-self: self-start;
+		}
+	}
 
 	@media screen and (max-width: 1280px) and (max-width: 600px) {
 		width: 100vw;

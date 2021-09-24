@@ -5,10 +5,8 @@
 				<h1>{{ article.title }}</h1>
 				<h3>{{ article.description }}</h3>
 				<h5 v-if="article.author">Edited By: {{ article.author }}</h5>
-				<!-- <div class="image-container"> -->
-					<img :src="article.urlToImage" :alt="article.title" />
-				<!-- </div> -->
-				<p>{{ article.content }}</p>
+				<img :src="article.urlToImage" :alt="article.title" />
+				<div v-html="article.content"></div>
 				<a :href="article.url" target="_blank">
 					Read Full Article at {{ article.source.name }}
 				</a>
@@ -37,7 +35,6 @@ export default {
 	},
 	mounted() {
 		window.addEventListener('keyup', (e) => {
-			console.log(e)
 			if (e.key === 'Backspace') {
 				this.$router.back()
 			}

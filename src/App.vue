@@ -2,9 +2,11 @@
 	<main>
 		<main-header />
 		<div class="router-view-styles">
-			<transition name="router">
-				<router-view />
-			</transition>
+			<router-view v-slot="{ Component }">
+				<transition name="router">
+					<component :is="Component" />
+				</transition>
+			</router-view>
 		</div>
 		<popup :show="isError" :title="errorStatus" @close="closePopup">
 			{{ errorObj.message }}

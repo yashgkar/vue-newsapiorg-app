@@ -53,10 +53,6 @@ export default {
 			margin-top: 2rem;
 			display: grid;
 			grid-template-columns: auto auto auto;
-			row-gap: 1rem;
-			column-gap: 1rem;
-			align-items: center;
-			justify-content: space-between;
 
 			@media screen and (max-width: 1280px) {
 				grid-template-columns: auto auto;
