@@ -48,23 +48,22 @@ export default createStore({
 			const urlStrings = [`https://newsapi.org/v2/${type}?`, params.toString()]
 			const url = urlStrings.join('')
 			ctx.commit('setLoading', true)
-			fetch(url)
-				.then(async (res) => {
-					if (res.ok) {
-						const data = await res.json()
-						ctx.commit('setArticles', data)
-						ctx.commit('setLoading', false)
-						if (payload.page === 0) {
-							ctx.commit('setOldArticles', data)
-							ctx.commit('setPageNumber', 1)
-							return
-						}
-						ctx.commit('setPageNumber', page)
+			fetch(url).then(async (res) => {
+				if (res.ok) {
+					const data = await res.json()
+					ctx.commit('setArticles', data)
+					ctx.commit('setLoading', false)
+					if (payload.page === 0) {
+						ctx.commit('setOldArticles', data)
+						ctx.commit('setPageNumber', 1)
 						return
 					}
-					const err = await res.json()
-					ctx.dispatch('setError', err)
-				})
+					ctx.commit('setPageNumber', page)
+					return
+				}
+				const err = await res.json()
+				ctx.dispatch('setError', err)
+			})
 		},
 		setSearchText(ctx, payload) {
 			ctx.commit('setSearchText', payload)
@@ -72,8 +71,12 @@ export default createStore({
 		setCountry(ctx, payload) {
 			ctx.commit('setCountry', payload)
 		},
-		getSingleArticle(ctx, articleId) {
-			const article = ctx.getters.articles.find((item) => item.id === articleId)
+		getSingleArticle(ctx, title) {
+			const article = ctx.getters.articles.find((item) => {
+				if (item.title === title) {
+					return true
+				}
+			})
 			return article
 		},
 		setCategory(ctx, payload) {

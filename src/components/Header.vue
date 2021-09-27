@@ -4,37 +4,17 @@
 			<nav>
 				<router-link to="/"><h4>NEWS CENTER</h4></router-link>
 				<div class="filter">
-					<select
-						v-if="isCountryEnabled"
-						@change="changeCategory"
-						name="category"
-						id="category"
+					<c-select
+						:options="categories"
+						v-model="changeCategory"
 						:value="getCategory"
-					>
-						<option
-							v-for="category in categories"
-							:key="category.code"
-							:value="category.code"
-						>
-							{{ category.label }}
-						</option>
-					</select>
-					<select
-						v-if="isCountryEnabled"
+					/>
+					<c-select
+						:options="countries"
 						@change="changeCountry"
-						name="country"
-						id="country"
 						:value="getCountry"
-					>
-						<option
-							v-for="country in countries"
-							:key="country.code"
-							:value="country.code"
-						>
-							{{ country.label }}
-						</option>
-					</select>
-					<input
+					/>
+					<c-input
 						@keyup="searchFunction"
 						:value="searchText"
 						type="text"
@@ -57,7 +37,9 @@ export default {
 	data() {
 		return {
 			countries,
-			categories
+			categories,
+			selectedCountry: 'us',
+			selectedCategory: 'general'
 		}
 	},
 	computed: {
@@ -116,7 +98,7 @@ export default {
 	},
 	unmounted() {
 		window.removeEventListener('keyup', () => {})
-	},
+	}
 }
 
 document.body.style = 'margin:0;padding:0;'

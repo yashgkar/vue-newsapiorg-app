@@ -30,7 +30,7 @@ export default {
 			return ''
 		}
 	},
-	async created() {
+	async beforeCreate() {
 		await this.$store.dispatch('getResultByPage', {
 			page: 0
 		})

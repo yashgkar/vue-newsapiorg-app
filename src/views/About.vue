@@ -26,22 +26,30 @@ export default {
 			article: null
 		}
 	},
-	async created() {
-		const singleArticle = await this.$store.dispatch(
-			'getSingleArticle',
-			this.$route.params.id
-		)
-		this.article = singleArticle
+	computed: {
+		articles () {
+			return this.$store.getters.articles
+		}
 	},
-	mounted() {
-		window.addEventListener('keyup', (e) => {
-			if (e.key === 'Backspace') {
-				this.$router.back()
+	methods: {
+		async getSingleArticle () {
+			const decodedTitle = decodeURI(this.$route.params.id)
+			const singleArticle = await this.$store.dispatch(
+				'getSingleArticle',
+				decodedTitle
+			)
+			this.article = singleArticle
+		}
+	},
+	watch: {
+		articles (cur, old) {
+			if (cur !== old) {
+				this.getSingleArticle()
 			}
-		})
+		},
 	},
-	unmounted() {
-		window.removeEventListener('keyup', () => {})
+	created() {
+		this.getSingleArticle()
 	}
 }
 </script>

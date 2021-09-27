@@ -9,7 +9,6 @@
 				<h5>{{ newsdata.author }}</h5>
 				<p>{{ description }}</p>
 			</div>
-			<!-- <router-link :to="'/'+newsdata.id">Read more...</router-link> -->
 			<div class="date-container">
 				<h5>Published: {{ date }}</h5>
 			</div>
@@ -30,7 +29,8 @@ export default {
 	},
 	methods: {
 		openDetails() {
-			this.$router.push(`/${this.newsdata.id}`)
+			const encodedTitle = encodeURI(this.newsdata.title)
+			this.$router.push(`/${encodedTitle}`)
 		}
 	}
 }
@@ -68,7 +68,11 @@ section {
 	}
 
 	@media screen and (max-width: 1280px) and (max-width: 600px) {
-		width: 100vw;
+		width: 85vw;
+
+		&:nth-child(n) {
+			justify-self: center;
+		}
 	}
 
 	.image-container {
