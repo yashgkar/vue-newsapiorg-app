@@ -1,7 +1,7 @@
 <template>
 	<section @click="openDetails">
 		<div class="image-container">
-			<img :src="newsdata.urlToImage" :alt="newsdata.title" />
+			<img v-if="newsdata.urlToImage" :src="newsdata.urlToImage" :alt="newsdata.title" />
 		</div>
 		<main>
 			<h4>{{ newsdata.title }}</h4>

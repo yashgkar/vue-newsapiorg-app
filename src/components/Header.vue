@@ -6,7 +6,7 @@
 				<div class="filter">
 					<c-select
 						:options="categories"
-						v-model="changeCategory"
+						@change="changeCategory"
 						:value="getCategory"
 					/>
 					<c-select
